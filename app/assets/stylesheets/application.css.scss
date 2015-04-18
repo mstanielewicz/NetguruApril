@@ -1,1 +1,64 @@
 @import "bootstrap";
+
+.navbar-default {
+  height: 80px;
+  border-bottom: 1px solid #AAAAAA;
+  border-left: 1px solid #AAAAAA;
+  border-right: 1px solid #AAAAAA;
+  border-top: 1px dashed #AAAAAA;
+  border-radius: 0px;
+}
+
+.navbar-nav {
+  height: 100%;
+}
+
+.navbar-nav > li {
+  height: 100%;
+}
+
+.navbar-nav > li:hover {
+  background-color: #CCCCCC;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #444444;
+  height: 100%;
+  font-size: 20px;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #444444;
+}
+
+.container-fluid {
+  background-color: #EEEEEE;
+  padding: 10px;
+  border: 1px solid #AAAAAA;
+}
+
+.alert {
+  height: 50px;
+  border: 1px dashed #444444;
+}
+
+.alert-error {
+  background-color: #FFCCCC;
+}
+
+.alert-notice {
+  background-color: #C2F0FF;
+}
+
+.footer {
+  height: 40px;
+  text-align: center;
+  padding-top: 10px;
+  margin-top: 10px;
+  background-color: #EEEEEE;
+  border-top: 1px solid #AAAAAA;
+  border-left: 1px solid #AAAAAA;
+  border-right: 1px solid #AAAAAA;
+  border-bottom: 1px dashed #AAAAAA;
+  font-size: 10px;
+}

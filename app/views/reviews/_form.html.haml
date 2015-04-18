@@ -10,5 +10,5 @@
     = f.text_area :content, class: 'form-control'
   .form-group
     = f.input :rating, collection: 1..5, class: 'form-control'
-
-  = f.submit 'Save', class: 'btn btn-default'
+  .pull-right
+    = f.submit 'Save', class: 'btn btn-default btn-success'

@@ -1,20 +1,24 @@
+
 %h1 Listing categories
 
-%table.table
+%table.table.table-striped
   %tr
     %th Name
-    %th
-    %th
-    %th
+    %th{:width => "20%"}
 
   - categories.each do |category|
     %tr
-      %td= category.name
-      %td= link_to 'Show', category
-      - if current_user && current_user.admin?
-        %td= link_to 'Edit', edit_category_path(category)
-        %td= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }
+      %td
+        %h4
+          = category.name
+      %td
+        .pull-right
+          = link_to 'Show', category, class: ['btn btn-default btn-success']
+          - if current_user && current_user.admin?
+            = link_to 'Edit', edit_category_path(category), class: ['btn btn-default btn-warning']
+            = link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: ['btn btn-default btn-danger']
 
 %br
 - if current_user && current_user.admin?
-  = link_to 'New Category', new_category_path
+  .pull-right
+    = link_to 'New Category', new_category_path, class: ['btn btn-default btn-info btn-lg']

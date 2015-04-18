@@ -1,18 +1,30 @@
-%p#notice= notice
+.col-sm-12
+  %h1
+    = category.name
 
-%p
-  %b Name:
-  = category.name
+  %table.table.table-striped
+    %tr
+      %th Product name
+      %th{:width => "25%"}
+    - category.products.each do |product|
+      %tr
+        %td
+          %h5
+            = product.title
+        %td
+          .pull-right
+            = link_to 'Show', category_product_path(category_id: category.id, id: product.id), class: ['btn btn-default btn-success']
+            - if current_user && current_user == product.user
+              = link_to 'Edit', edit_category_product_path(category_id: category.id, id: product.id), class: ['btn btn-default btn-warning']
+              = link_to 'Destroy', category_product_path(category_id: category.id, id: product.id), method: :delete, data: { confirm: 'Are you sure?' }, class: ['btn btn-default btn-danger']
+  .pull-right
+    - if current_user && current_user.admin?
+      = link_to 'Edit', edit_category_path(category), class: ['btn btn-default btn-warning']
+    = link_to 'Back', categories_path, class: 'btn btn-default'
 
-%p
-  - category.products.each do |product|
-    = product.title
 
-%p
-  %h3 New product
+.col-sm-8.col-sm-offset-2
+  %h4 Add new product
   = render 'products/form'
 
-- if current_user && current_user.admin?
-  = link_to 'Edit', edit_category_path(category)
-  \|
-= link_to 'Back', categories_path, class: 'btn btn-primary'
+

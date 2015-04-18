@@ -9,17 +9,27 @@
     = javascript_include_tag 'application'
 
   %body
-    %nav.navbar.navbar-default
-      .container-fluid
+    .col-sm-10.col-sm-offset-1
+      - flash.each do |key, value|
+        %div{:class => "alert alert-#{key}"}= value
+      %nav.navbar.navbar-default
         .navbar-header
-          %span.navbar-brand #{AppConfig.workshops_name}
+          %a.navbar-brand{:href => "/"}
+            = image_tag "netguru.png"
+            Netguru Workshops April
         %p.navbar-text.navbar-right
-          -if current_user
-            = link_to "Log out", destroy_user_session_url, :method => :delete
-          - else
-            = link_to "Register", new_user_registration_path
-            = link_to "Log in", new_user_session_path
-    .container-fluid
-      .row
-        .col-lg-12
-          = yield
+          %ul.nav.navbar-nav.navbar-right
+            -if current_user
+              %li
+                = link_to "Log out", destroy_user_session_url, :method => :delete
+            - else
+              %li
+                = link_to "Register", new_user_registration_path
+              %li
+                = link_to "Log in", new_user_session_path
+      .container-fluid
+        .row
+          .col-sm-12
+            = yield
+      .footer
+        Mateusz Stanielewicz

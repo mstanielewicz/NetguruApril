@@ -9,5 +9,6 @@
   .form-group
     = f.label :name
     = f.text_field :name, class: 'form-control'
-
-  = f.submit 'Save', class: 'btn btn-default'
+  .pull-right
+    = f.submit 'Save', class: 'btn btn-success'
+    = link_to 'Back', categories_path, class: 'btn btn-default'
