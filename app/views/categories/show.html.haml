@@ -5,12 +5,20 @@
   %table.table.table-striped
     %tr
       %th Product name
+      %th Product price
+      %th Avg rating
       %th{:width => "25%"}
     - category.products.each do |product|
       %tr
         %td
           %h5
             = product.title
+        %td
+          %h5
+            = product.price
+        %td
+          %h5
+            = product.average_rating
         %td
           .pull-right
             = link_to 'Show', category_product_path(category_id: category.id, id: product.id), class: ['btn btn-default btn-success']

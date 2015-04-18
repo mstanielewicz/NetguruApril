@@ -1,6 +1,7 @@
 !!!
 %html{ lang: 'en' }
   %head
+    %title Netguru Workshops April - Mateusz Stanielewicz
     %meta{ charset: 'utf-8' }/
     %meta{ content: 'IE=Edge,chrome=1', 'http-equiv' => 'X-UA-Compatible' }/
     %meta{ content: 'width=device-width, initial-scale=1.0', name: 'viewport' }/
@@ -20,6 +21,8 @@
         %p.navbar-text.navbar-right
           %ul.nav.navbar-nav.navbar-right
             -if current_user
+              %li
+                = link_to "Your profile", user_path(id: current_user.id)
               %li
                 = link_to "Log out", destroy_user_session_url, :method => :delete
             - else

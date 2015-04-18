@@ -9,10 +9,13 @@ class ReviewsController < ApplicationController
   def create
     self.review = Review.new(review_params)
     self.review.user = current_user
-
-    if review.save
+    if Review.where(product: product, user: current_user)
+      flash[:error] = "Only one review per user!"
+      redirect_to category_product_url(category_id: product.category.id, id: product.id)
+    elsif review.save
+      flash[:notice] = "Review successfully created."
       product.reviews << review
-      redirect_to category_product_url(product.category, product), notice: 'Review was successfully created.'
+      redirect_to category_product_url(category_id: product.category.id, id: product.id), notice: 'Review was successfully created.'
     else
       render action: 'new'
     end
@@ -20,7 +23,7 @@ class ReviewsController < ApplicationController
 
   def destroy
     review.destroy
-    redirect_to category_product_url(product.category, product), notice: 'Review was successfully destroyed.'
+    redirect_to category_product_url(category_id: product.category.id, id: product.id), notice: 'Review was successfully destroyed.'
   end
 
   private

@@ -2,4 +2,4 @@
   %p= review.content
   %p
     %b= review.rating
-    %em= review.author
+    %em= link_to "#{review.user.firstname} #{review.user.lastname}", user_path(id: review.user.id)

@@ -10,6 +10,10 @@
     %h4
       = product.price
   %p
+    Author:
+    %h4
+      = link_to "#{product.user.firstname} #{product.user.lastname}", user_path(id: product.user.id)
+  %p
     Category:
     %h4
       = product.category.name

@@ -1,0 +1,38 @@
+.col-sm-8.col-sm-offset-2
+  %h1
+    = @user.firstname + " " + @user.lastname
+    - if @user.admin?
+      = " (admin)"
+  %h3
+    = "Email: " + @user.email
+  %h3
+    = "Registered: " + @user.created_at.strftime("%d/%m/%Y")
+  %h3
+    = "Last login: " + @user.last_sign_in_at.strftime("%d/%m/%Y")
+
+  %br
+  %h3
+    Last reviews
+  %table.table.table-striped
+    %tr
+      %th Product
+      %th Content
+      %th Rating
+      %th Date
+    - @last_reviews.each do |r|
+      %tr
+        %td
+          %h4
+            = r.product.title
+        %td
+          %h5
+            = r.content
+        %td
+          %h5
+            = r.rating
+        %td
+          %h5
+            = r.created_at.strftime("%d/%m/%Y")
+  %br
+  .pull-right
+    = link_to 'Back', root_path, class: 'btn btn-default'
