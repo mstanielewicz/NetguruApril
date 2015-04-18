@@ -16,19 +16,19 @@ admin = User.create(email: "admin@example.com", password: "useruser1", password_
 
 category = Category.create(name: "Test Category 1")
 
-p1 = FactoryGirl.create(:product, category: category)
-p2 = FactoryGirl.create(:product, category: category)
+p1 = Product.create(title: "Best product ever", description: "No desc required!", price: 666.99,
+                    user: admin, category: category)
+p2 = Product.create(title: "Best product ever too", description: "No desc required!", price: 13.99,
+                    user: admin, category: category)
 
-8.times do
-  FactoryGirl.create(:product, category: category)
-end
+Review.create(product: p1, user: user1, content: "Recenzja!", rating: 1)
+Review.create(product: p1, user: user2, content: "Recenzja!", rating: 1)
+Review.create(product: p1, user: user3, content: "Recenzja!", rating: 3)
+Review.create(product: p1, user: user4, content: "Recenzja!", rating: 4)
+Review.create(product: p1, user: user5, content: "Recenzja!", rating: 5)
+Review.create(product: p2, user: user1, content: "Recenzja!", rating: 5)
+Review.create(product: p2, user: user2, content: "Recenzja!", rating: 2)
+Review.create(product: p2, user: user3, content: "Recenzja!", rating: 3)
+Review.create(product: p2, user: user4, content: "Recenzja!", rating: 4)
+Review.create(product: p2, user: user5, content: "Recenzja!", rating: 5)
 
-FactoryGirl.create(:review, product: p1, user: user1)
-FactoryGirl.create(:review, product: p1, user: user2)
-FactoryGirl.create(:review, product: p1, user: user3)
-FactoryGirl.create(:review, product: p1, user: user4)
-FactoryGirl.create(:review, product: p2, user: user1)
-FactoryGirl.create(:review, product: p2, user: user2)
-FactoryGirl.create(:review, product: p2, user: user3)
-FactoryGirl.create(:review, product: p2, user: user4)
-FactoryGirl.create(:review, product: p2, user: user5)
