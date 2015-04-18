@@ -57,8 +57,13 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   def destroy
     if current_user
-      product.destroy
-      redirect_to category_url(product.category), notice: 'Product was successfully destroyed.'
+      if self.product.user != current_user
+        flash[:error] = 'You are not allowed to delete this product.'
+        redirect_to category_product_url(category, product)
+      else
+        product.destroy
+        redirect_to category_url(product.category), notice: 'Product was successfully destroyed.'
+      end
     else
       redirect_to new_user_session_path
     end
