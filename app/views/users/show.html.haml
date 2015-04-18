@@ -7,8 +7,9 @@
     = "Email: " + @user.email
   %h3
     = "Registered: " + @user.created_at.strftime("%d/%m/%Y")
-  %h3
-    = "Last login: " + @user.last_sign_in_at.strftime("%d/%m/%Y")
+  - if @user.last_sign_in_at
+    %h3
+      = "Last login: " + @user.last_sign_in_at.strftime("%d/%m/%Y")
 
   %br
   %h3
