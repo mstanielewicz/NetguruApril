@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy, :create]
   expose(:category)
   expose(:products)
   expose(:product)
@@ -15,31 +16,52 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    if Product.find(params[:id]).user != current_user
+      flash[:error] = 'You are not allowed to edit this product.'
+      redirect_to category_product_url(category, product)
+    end
   end
 
   def create
-    self.product = Product.new(product_params)
+    if current_user
+      self.product = Product.new(product_params)
 
-    if product.save
-      category.products << product
-      redirect_to category_product_url(category, product), notice: 'Product was successfully created.'
+      if product.save
+        category.products << product
+        redirect_to category_product_url(category, product), notice: 'Product was successfully created.'
+      else
+        render action: 'new'
+      end
     else
-      render action: 'new'
+      redirect_to new_user_session_path
     end
   end
 
   def update
-    if self.product.update(product_params)
-      redirect_to category_product_url(category, product), notice: 'Product was successfully updated.'
+    if current_user
+      if self.product.user != current_user
+        flash[:error] = 'You are not allowed to edit this product.'
+        redirect_to category_product_url(category, product)
+      else
+        if self.product.update(product_params)
+          redirect_to category_product_url(category, product), notice: 'Product was successfully updated.'
+        else
+          redirect_to(category_product_url(category, product))
+        end
+      end
     else
-      render action: 'edit'
+      redirect_to new_user_session_path
     end
   end
 
   # DELETE /products/1
   def destroy
-    product.destroy
-    redirect_to category_url(product.category), notice: 'Product was successfully destroyed.'
+    if current_user
+      product.destroy
+      redirect_to category_url(product.category), notice: 'Product was successfully destroyed.'
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   private
